@@ -8,7 +8,7 @@ class FCNetwork(nn.Module):
         self.fc2 = nn.Linear(16, 1)
 
     def forward(self, x):
-        x = nn.Flatten()
+        x = torch.flatten(x)
         x = self.fc1(x)
         x = self.fc2(x)
 
