@@ -12,6 +12,10 @@ from utils import *
 from train import *
 
 # 10. deep learning for timeseries
+train_loader = DataLoader(ClimateDataset('data_file/jena_climate/train.csv'),
+    batch_size=256, shuffle=True, num_workers=2, pin_memory=True)
+val_loader = DataLoader(ClimateDataset('data_file/jena_climate/val.csv'),
+    batch_size=256, shuffle=False, num_workers=2, pin_memory=True)
 
 best_loss = 1e+10
 name = 'FCNetwork'
