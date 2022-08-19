@@ -1,4 +1,5 @@
 from utils import *
+import time
 
 def train(train_loader, model, criterion, optimizer, scheduler, writer, epoch):
     """Train for one epoch on the training set"""
