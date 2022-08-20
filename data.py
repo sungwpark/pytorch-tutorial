@@ -35,10 +35,4 @@ class ClimateDataset(Dataset):
 
         y = self.csv_file.iloc[index + self.sequence_length*self.sampling_rate, 2]
 
-        return torch.tensor(X), torch.tensor(y)
-
-dataset = ClimateDataset('data_file/jena_climate/train.csv')
-
-sample = dataset[0]
-print(sample)
-
+        return torch.tensor(X).float(), torch.tensor([y]).float()

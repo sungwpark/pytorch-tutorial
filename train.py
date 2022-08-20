@@ -1,4 +1,4 @@
-from utils import *
+from utils import AverageMeter
 import time
 
 def train(train_loader, model, criterion, optimizer, scheduler, writer, epoch):

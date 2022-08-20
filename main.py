@@ -6,23 +6,24 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
-from data import *
-from model import *
-from utils import *
-from train import *
+from data import ClimateDataset
+from model import FCNetwork
+from utils import save_checkpoint
+from train import train, validate
 
 # 10. deep learning for timeseries
 train_loader = DataLoader(ClimateDataset('data_file/jena_climate/train.csv'),
-    batch_size=256, shuffle=True, num_workers=2, pin_memory=True)
+    batch_size=256, shuffle=True, num_workers=4, pin_memory=True)
 val_loader = DataLoader(ClimateDataset('data_file/jena_climate/val.csv'),
-    batch_size=256, shuffle=False, num_workers=2, pin_memory=True)
+    batch_size=256, shuffle=False, num_workers=4, pin_memory=True)
 
 best_loss = 1e+10
+directory = 'drive/MyDrive/pytorch-tutorial-log/'
 name = 'FCNetwork'
-writer = SummaryWriter("drive/MyDrive/pytorch-tutorial-log/%s"%(name))
+writer = SummaryWriter(directory + name)
 
 start_epoch = 0
-epochs = 50
+epochs = 10
 
 model = FCNetwork(1680)
 model = model.cuda()
@@ -43,6 +44,6 @@ for epoch in range(start_epoch, epochs):
         'optimizer' : optimizer.state_dict(),
         'scheduler' : scheduler.state_dict(),
         'best_loss': best_loss,
-    }, is_best, name, directory='/content/drive/MyDrive/pytorch-tutorial-log/')
+    }, is_best, directory + name + '/')
 print('Best loss: ', best_loss)
 

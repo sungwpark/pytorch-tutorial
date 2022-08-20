@@ -19,7 +19,7 @@ class AverageMeter(object):
         self.count += n
         self.avg = self.sum / self.count
 
-def save_checkpoint(state, is_best, directory='ResNet34/', filename='checkpoint.pth.tar'):
+def save_checkpoint(state, is_best, directory, filename='checkpoint.pth.tar'):
     """Saves checkpoint to disk"""
     if not os.path.exists(directory):
         os.makedirs(directory)
