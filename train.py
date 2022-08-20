@@ -1,5 +1,7 @@
-from utils import AverageMeter
+import torch
 import time
+
+from utils import AverageMeter
 
 def train(train_loader, model, criterion, optimizer, scheduler, writer, epoch):
     """Train for one epoch on the training set"""
