@@ -20,13 +20,14 @@ class FCNetwork(nn.Module):
 class Conv1dNet(nn.Module):
     def __init__(self):
         super(Conv1dNet, self).__init__()
-        self.conv1 = nn.Conv1d(1, 8, 24)
+        self.conv1 = nn.Conv1d(14, 8, 24)
         self.conv2 = nn.Conv1d(8, 8, 12)
         self.conv3 = nn.Conv1d(8, 8, 6)
         self.flatten = nn.Flatten()
         self.fc = nn.Linear(8, 1)
     
     def forward(self, x):
+        x = x.transpose(1, 2)
         x = self.conv1(x)
         x = F.relu(x)
         x = F.max_pool1d(x, 2)

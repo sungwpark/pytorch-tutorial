@@ -18,7 +18,7 @@ val_loader = DataLoader(ClimateDataset('data_file/jena_climate/val.csv'),
     batch_size=256, shuffle=False, num_workers=2, pin_memory=True)
 
 best_loss = 1e+10
-directory = 'drive/MyDrive/pytorch-tutorial-log/'
+directory = '../drive/MyDrive/pytorch-tutorial-log/'
 name = 'FCNetwork'
 writer = SummaryWriter(directory + name)
 
