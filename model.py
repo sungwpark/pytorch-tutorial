@@ -44,3 +44,19 @@ class Conv1dNet(nn.Module):
         x = self.fc(x)
 
         return x
+
+class LSTMNet(nn.Module):
+    def __init__(self):
+        super(LSTMNet, self).__init__()
+        self.lstm = nn.LSTM(14, 16, batch_first=True, bidirectional=False)
+        self.flatten = nn.Flatten()
+        self.fc = nn.Linear(16, 1)
+
+    def forward(self):
+        x, (h, c) = self.lstm(x)
+
+        h = self.flatten(h)
+        h = self.fc(h)
+
+        return h
+
