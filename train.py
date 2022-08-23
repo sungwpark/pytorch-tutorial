@@ -1,7 +1,7 @@
 import torch
 import time
 
-from utils import AverageMeter
+from utils import AverageMeter, accuracy
 from torch.nn.utils import clip_grad_norm_
 
 def train(train_loader, model, criterion, optimizer, scheduler, writer, epoch):
@@ -74,7 +74,7 @@ def train_text(train_loader, model, criterion, optimizer, scheduler, writer, epo
     model.train()
 
     end = time.time()
-    for i, (label, text, offsets) in enumerate(dataloader):
+    for i, (label, text, offsets) in enumerate(train_loader):
         output = model(text, offsets)
         loss = criterion(output, label)
 

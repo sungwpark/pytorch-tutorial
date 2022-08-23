@@ -58,6 +58,24 @@ class LSTMNet(nn.Module):
         return h
 
 
+class TextClassificationModel(nn.Module):
+    def __init__(self, vocab_size, embed_dim):
+        super(TextClassificationModel, self).__init__()
+        self.embedding = nn.EmbeddingBag(vocab_size, embed_dim, sparse=True)
+        self.fc = nn.Linear(embed_dim, 1)
+        self.init_weights()
+
+    def init_weights(self):
+        initrange = 0.5
+        self.embedding.weight.data.uniform_(-initrange, initrange)
+        self.fc.weight.data.uniform_(-initrange, initrange)
+        self.fc.bias.data.zero_()
+
+    def forward(self, text, offsets):
+        embedded = self.embedding(text, offsets)
+        return torch.sigmoid(self.fc(embedded))
+
+
 class TextLSTMNet(nn.Module):
     def __init__(self, vocab_size):
         super(TextLSTMNet, self).__init__()
@@ -71,7 +89,7 @@ class TextLSTMNet(nn.Module):
         out, (h, c) = self.lstm(embedded)
         h = self.fc(h)
 
-        return F.sigmoid(h)
+        return torch.sigmoid(h)
 
 
 class TextTransformer(nn.Module):
