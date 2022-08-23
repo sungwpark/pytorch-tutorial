@@ -95,7 +95,7 @@ EPOCHS = 10 # epoch
 LR = 5  # learning rate
 BATCH_SIZE = 64 # batch size for training
 
-vocab_size, train_dataloader, valid_dataloader, test_dataloader = get_IMDB_data()
+vocab_size, train_dataloader, valid_dataloader, test_dataloader = get_IMDB_data(BATCH_SIZE)
 
 emsize = 64
 model = TextClassificationModel(vocab_size, emsize, num_class).cuda()

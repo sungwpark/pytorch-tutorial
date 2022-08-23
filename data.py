@@ -48,7 +48,7 @@ from torch.utils.data.dataset import random_split
 from torchtext.data.functional import to_map_style_dataset
 
 
-def get_IMDB_data():
+def get_IMDB_data(BATCH_SIZE):
 
     tokenizer = get_tokenizer('basic_english')
     train_iter = IMDB(split='train')
